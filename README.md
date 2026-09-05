@@ -91,3 +91,9 @@ The response contains an `answer`, a `products` array populated from the databas
 ## How grounding works
 
 The assistant receives catalog candidates retrieved from MySQL and can call five Spring AI tools: name search, category search, budget search, details lookup, and product comparison. The system prompt restricts it to those returned results. The API also returns the database-derived product array separately, so clients can render authoritative product data without parsing the model text.
+
+## Developed By
+
+**Jatin Gupta**  
+GitHub: [@jatingupta18](https://github.com/jatingupta18)  
+LinkedIn: [Jatin Gupta](https://www.linkedin.com/in/jatingupta17)
