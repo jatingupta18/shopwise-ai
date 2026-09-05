@@ -94,6 +94,6 @@ The assistant receives catalog candidates retrieved from MySQL and can call five
 
 ## Developed By
 
-**Jatin Gupta**  
+**Jatin Kumar Gupta**  
 GitHub: [@jatingupta18](https://github.com/jatingupta18)  
 LinkedIn: [Jatin Gupta](https://www.linkedin.com/in/jatingupta17)
