@@ -1,0 +1,10 @@
+### Create Product
+POST http://localhost:8080/api/products
+Content-Type: application/json
+
+{
+  "name": "Laptop",
+  "description": "Dell Inspiron Laptop",
+  "price": 55000,
+  "category": "Electronics"
+}

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ShopWise AI — a catalog-grounded shopping assistant">
+    <title>ShopWise AI | AI Shopping Assistant</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="page-glow glow-one"></div><div class="page-glow glow-two"></div>
+<main class="app-shell">
+    <section class="assistant-card" aria-labelledby="app-title">
+        <header class="app-header">
+            <a class="brand" href="/" aria-label="ShopWise AI home">
+                <span class="brand-symbol" aria-hidden="true"><b>S</b><i></i><i></i></span>
+                <span><small>CATALOG-GROUNDED ASSISTANT</small><strong id="app-title">ShopWise <em>AI</em></strong></span>
+            </a>
+            <div class="header-actions">
+                <a class="home-link" href="/">Home</a>
+                <a class="home-link" href="/order-history.html">Orders</a>
+                <button id="cartButton" class="cart-button" type="button" aria-label="Open shopping cart">
+                    <span class="cart-icon">🛒</span>
+                    <span id="cartBadge" class="cart-badge">0</span>
+                </button>
+                <div class="header-status" title="Recommendations are checked against your current catalog"><span class="online-dot"></span><span class="status-copy"><b>Live catalog</b><small>Connected</small></span></div>
+            </div>
+        </header>
+
+        <div id="chatMessages" class="messages" aria-live="polite" aria-label="Shopping conversation">
+            <section id="welcomeState" class="welcome-state" aria-labelledby="welcome-title">
+                <div class="welcome-orb" aria-hidden="true"><span>✦</span><i></i><i></i></div>
+                <p class="section-kicker">YOUR PERSONAL SHOPPING GUIDE</p>
+                <h1 id="welcome-title">Shop smarter,<br><span>not harder.</span></h1>
+                <p class="welcome-copy">Tell me what you need. I’ll search your live store catalog for options that fit your needs and budget.</p>
+                <div class="trust-row"><span>✓ Catalog-backed</span><span>✓ Budget aware</span><span>✓ No made-up products</span></div>
+            </section>
+
+            <article class="message assistant-message initial-message">
+                <div class="message-avatar ai-avatar" aria-hidden="true">✦</div>
+                <div class="message-stack"><span class="message-label">SHOPWISE AI <time>READY</time></span><div class="message-content"><p>Hi! What can I help you find today?</p></div></div>
+            </article>
+        </div>
+
+        <section class="quick-prompts" aria-label="Suggested shopping requests">
+            <p class="prompt-title"><span>✦</span> Explore with ShopWise</p>
+            <div class="prompt-list">
+                <button type="button" class="prompt-chip" data-prompt="I need a laptop under 60000"><span class="chip-icon">⌘</span><span>Laptop under ₹60,000</span><b>→</b></button>
+                <button type="button" class="prompt-chip" data-prompt="Show me electronics"><span class="chip-icon">◈</span><span>Browse electronics</span><b>→</b></button>
+                <button type="button" class="prompt-chip" data-prompt="Recommend products within my budget"><span class="chip-icon">₹</span><span>Best value picks</span><b>→</b></button>
+                <button type="button" class="prompt-chip" data-prompt="Show my cart"><span class="chip-icon">🛒</span><span>Show my cart</span><b>→</b></button>
+                <button type="button" class="prompt-chip" data-prompt="Compare the best 2 laptops"><span class="chip-icon">⇄</span><span>Compare laptops</span><b>→</b></button>
+            </div>
+        </section>
+
+        <form id="chatForm" class="composer">
+            <label class="sr-only" for="messageInput">Your shopping request</label>
+            <div class="input-shell">
+                <span class="input-sparkle" aria-hidden="true">✦</span>
+                <textarea id="messageInput" name="message" rows="1" maxlength="2000" placeholder="Ask about products, budgets, or comparisons…" required></textarea>
+                <span id="characterHint" class="character-hint" aria-live="polite"></span>
+            </div>
+            <button id="sendButton" class="send-button" type="submit" aria-label="Send shopping request"><span class="send-label">Send</span><span class="send-icon" aria-hidden="true">↑</span></button>
+        </form>
+        <p class="composer-note"><span><kbd>Enter</kbd> to send</span><i></i><span><kbd>Shift</kbd> + <kbd>Enter</kbd> for a new line</span><span class="secure-note">🔒 Your catalog stays yours</span></p>
+    </section>
+</main>
+
+<!-- Cart Drawer -->
+<div id="cartOverlay" class="cart-overlay"></div>
+<aside id="cartDrawer" class="cart-drawer" aria-label="Shopping cart">
+    <div class="cart-header">
+        <h2>Your Cart</h2>
+        <button id="closeCartButton" class="close-cart-button" type="button" aria-label="Close cart">
+            <span>×</span>
+        </button>
+    </div>
+    <div id="cartItems" class="cart-items">
+        <!-- Cart items will be rendered here -->
+    </div>
+    <div class="cart-footer">
+        <div class="cart-summary">
+            <div class="cart-summary-row">
+                <span id="cartItemCount">0 items</span>
+                <span id="cartSubtotal">₹0.00</span>
+            </div>
+        </div>
+        <div class="cart-actions">
+            <button id="clearCartButton" class="clear-cart-button" type="button">Clear Cart</button>
+            <button id="checkoutButton" class="checkout-button" type="button">Proceed to Checkout</button>
+        </div>
+    </div>
+</aside>
+
+<template id="loadingTemplate">
+    <article class="message assistant-message loading-message"><div class="message-avatar ai-avatar" aria-hidden="true">✦</div><div class="message-stack"><span class="message-label">SHOPWISE AI <time>SEARCHING CATALOG</time></span><div class="message-content typing" aria-label="Shopping assistant is searching"><i></i><i></i><i></i></div></div></article>
+</template>
+<template id="emptyProductsTemplate">
+    <section class="empty-products" aria-label="No matching catalog products"><div class="empty-icon" aria-hidden="true">⌕</div><div><strong>No exact matches in the catalog</strong><p>Try another product name, category, or a different budget.</p></div><button type="button" data-empty-retry>Try a new search</button></section>
+</template>
+<script src="/app.js"></script>
+</body>
+</html>

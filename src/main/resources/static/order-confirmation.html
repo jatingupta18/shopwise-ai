@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ShopWise AI Order Confirmation">
+    <title>ShopWise AI | Order Confirmation</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="confirmation-page">
+<div class="page-glow glow-one"></div><div class="page-glow glow-two"></div>
+<main class="app-shell">
+    <section class="confirmation-card" aria-labelledby="confirmation-title">
+        <header class="app-header">
+            <a class="brand" href="/chat.html" aria-label="ShopWise AI chat">
+                <span class="brand-symbol" aria-hidden="true"><b>S</b><i></i><i></i></span>
+                <span><small>CATALOG-GROUNDED ASSISTANT</small><strong>ShopWise <em>AI</em></strong></span>
+            </a>
+            <div class="header-actions">
+                <a class="home-link" href="/">Home</a>
+                <div class="header-status" title="Recommendations are checked against your current catalog"><span class="online-dot"></span><span class="status-copy"><b>Live catalog</b><small>Connected</small></span></div>
+            </div>
+        </header>
+
+        <div class="confirmation-content">
+            <div class="success-animation">
+                <div class="success-icon">✓</div>
+            </div>
+            
+            <h1 id="confirmation-title">Order Confirmed!</h1>
+            <p class="confirmation-subtitle">Thank you for your order</p>
+
+            <section class="confirmation-details">
+                <div class="detail-card">
+                    <div class="detail-item">
+                        <span class="detail-label">Order Number</span>
+                        <span class="detail-value order-number" id="displayOrderNumber">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Order Status</span>
+                        <span class="detail-value status confirmed">Confirmed</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Estimated Delivery</span>
+                        <span class="detail-value">3-5 business days</span>
+                    </div>
+                </div>
+
+                <div class="next-steps">
+                    <h2>What's Next?</h2>
+                    <ul>
+                        <li>Order confirmation has been sent to your email</li>
+                        <li>Your order is being prepared for shipment</li>
+                        <li>You will receive tracking information once shipped</li>
+                    </ul>
+                </div>
+
+                <div class="confirmation-actions">
+                    <a href="/chat.html" class="action-button primary">Continue Shopping</a>
+                    <a href="/order-history.html" class="action-button secondary">View Order History</a>
+                </div>
+            </section>
+        </div>
+    </section>
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderNumber = urlParams.get("orderNumber");
+    
+    if (orderNumber) {
+        document.getElementById("displayOrderNumber").textContent = orderNumber;
+    } else {
+        document.getElementById("displayOrderNumber").textContent = "Not available";
+    }
+});
+</script>
+</body>
+</html>

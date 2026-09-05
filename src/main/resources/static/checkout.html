@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ShopWise AI Checkout - Complete your order">
+    <title>ShopWise AI | Checkout</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="checkout-page">
+<div class="page-glow glow-one"></div><div class="page-glow glow-two"></div>
+<main class="app-shell">
+    <section class="checkout-card" aria-labelledby="checkout-title">
+        <header class="app-header">
+            <a class="brand" href="/chat.html" aria-label="ShopWise AI chat">
+                <span class="brand-symbol" aria-hidden="true"><b>S</b><i></i><i></i></span>
+                <span><small>CATALOG-GROUNDED ASSISTANT</small><strong>ShopWise <em>AI</em></strong></span>
+            </a>
+            <div class="header-actions">
+                <a class="home-link" href="/">Home</a>
+                <div class="header-status" title="Recommendations are checked against your current catalog"><span class="online-dot"></span><span class="status-copy"><b>Live catalog</b><small>Connected</small></span></div>
+            </div>
+        </header>
+
+        <div class="checkout-content">
+            <div class="checkout-main">
+                <h1 id="checkout-title">Checkout</h1>
+                <p class="checkout-subtitle">Complete your order details below</p>
+
+                <!-- Cart Summary -->
+                <section class="checkout-section cart-summary-section">
+                    <h2>Order Summary</h2>
+                    <div id="checkoutCartItems" class="checkout-cart-items">
+                        <!-- Cart items will be rendered here -->
+                    </div>
+                    <div class="checkout-totals">
+                        <div class="total-row">
+                            <span>Total Items</span>
+                            <span id="checkoutTotalItems">0</span>
+                        </div>
+                        <div class="total-row main-total">
+                            <span>Total Amount</span>
+                            <span id="checkoutTotalAmount">₹0.00</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Customer Details Form -->
+                <section class="checkout-section customer-details-section">
+                    <h2>Customer Details</h2>
+                    <form id="checkoutForm" class="checkout-form">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required
+                                   maxlength="100" placeholder="Enter your full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required
+                                   maxlength="100" placeholder="Enter your email address">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required
+                                   pattern="[0-9]{10}" maxlength="10" placeholder="10-digit phone number">
+                            <small class="form-hint">Enter 10-digit phone number</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Address *</label>
+                            <textarea id="address" name="address" required rows="2"
+                                      maxlength="255" placeholder="Enter your complete address"></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" name="city" required
+                                       maxlength="100" placeholder="City">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="state">State *</label>
+                                <input type="text" id="state" name="state" required
+                                       maxlength="100" placeholder="State">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pinCode">PIN Code *</label>
+                            <input type="text" id="pinCode" name="pinCode" required
+                                   pattern="[0-9]{6}" maxlength="6" placeholder="6-digit PIN code">
+                            <small class="form-hint">Enter 6-digit PIN code</small>
+                        </div>
+
+                        <button type="submit" class="checkout-submit-button" id="submitOrderButton">
+                            <span class="submit-label">Place Order</span>
+                            <span class="submit-icon">→</span>
+                        </button>
+                    </form>
+                </section>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="checkout-sidebar">
+                <section class="checkout-section payment-section">
+                    <h2>Payment</h2>
+                    <div class="payment-info">
+                        <div class="payment-icon">💳</div>
+                        <p><strong>Mock Payment</strong></p>
+                        <small>This is a demo payment step. No actual payment will be processed.</small>
+                    </div>
+                    <div class="payment-status" id="paymentStatus">
+                        <span class="status-indicator"></span>
+                        <span class="status-text">Ready for payment</span>
+                    </div>
+                </section>
+
+                <section class="checkout-section order-info-section">
+                    <h2>Order Information</h2>
+                    <div class="info-item">
+                        <span>Order Number</span>
+                        <span id="orderNumber">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Status</span>
+                        <span id="orderStatus">Pending</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Estimated Delivery</span>
+                        <span>3-5 business days</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="/checkout.js"></script>
+</body>
+</html>
