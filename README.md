@@ -1,11 +1,12 @@
 # AI Shopping Agent
 
-A Spring Boot shopping API with a database-grounded AI assistant. Product data remains in MySQL; the assistant is only given product information returned by the catalog tools. It does not use a hardcoded product catalog or API key.
+A Spring Boot shopping API with a database-grounded AI assistant. The assistant is only given product information returned by the catalog tools. It does not use a hardcoded product catalog or API key.
 
 ## Prerequisites
 
 - Java 21
-- MySQL with the existing `practice_db` database and its product data
+- H2 for default local development and tests (included)
+- Optional MySQL or PostgreSQL database for persistent deployments
 - Maven (or use `mvnw.cmd` on Windows)
 - Optional but recommended: [Ollama](https://ollama.com/) for free, local AI
 
@@ -15,12 +16,14 @@ Application settings come from environment variables. No secrets should be commi
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
-| `DB_URL` | `jdbc:mysql://localhost:3306/practice_db` | MySQL JDBC URL |
-| `DB_USERNAME` | `root` | MySQL user |
-| `DB_PASSWORD` | empty | MySQL password |
+| `DB_URL` | `jdbc:h2:mem:shopping;MODE=MySQL;DB_CLOSE_DELAY=-1` | JDBC URL for H2, MySQL, or PostgreSQL |
+| `DB_USERNAME` | `sa` | Database user |
+| `DB_PASSWORD` | empty | Database password |
+| `DB_DRIVER` | `org.h2.Driver` | JDBC driver class; use `org.postgresql.Driver` for PostgreSQL |
+| `DB_PLATFORM` | `org.hibernate.dialect.H2Dialect` | Hibernate dialect; use `org.hibernate.dialect.PostgreSQLDialect` for PostgreSQL |
 | `AI_PROVIDER` | `ollama` | Label returned in chat responses |
 | `OLLAMA_BASE_URL` | `http://localhost:11434` | Local Ollama server URL |
-| `OLLAMA_MODEL` | `llama3.1` | Ollama chat model |
+| `OLLAMA_MODEL` | `llama3.2` | Ollama chat model |
 | `AI_FALLBACK_ENABLED` | `true` | Return database-only matches if an AI provider is unavailable |
 
 ### Free local AI: Ollama (default)
@@ -28,7 +31,7 @@ Application settings come from environment variables. No secrets should be commi
 Install Ollama, then download and run a tool-capable model:
 
 ```powershell
-ollama pull llama3.1
+ollama pull llama3.2
 ollama serve
 ```
 
@@ -41,7 +44,7 @@ OpenAI is excluded from the default build. To enable it, set a key only in your 
 ```powershell
 $env:OPENAI_API_KEY = "your-key"
 $env:SPRING_PROFILES_ACTIVE = "openai"
-$env:DB_PASSWORD = "your-mysql-password"
+$env:DB_PASSWORD = "your-database-password"
 mvn -Popenai spring-boot:run
 ```
 
@@ -50,7 +53,6 @@ Optionally set `OPENAI_MODEL`. Never place the key in `application.properties` o
 ## Run
 
 ```powershell
-$env:DB_PASSWORD = "your-mysql-password"
 .\mvnw.cmd spring-boot:run
 ```
 
@@ -61,6 +63,20 @@ Run tests:
 ```
 
 Tests use an in-memory H2 database and do not need your MySQL server or AI provider.
+
+### Render PostgreSQL
+
+Keep the default H2 configuration for local development. For a persistent Render PostgreSQL database, configure these environment variables in the Render service (never commit the password):
+
+```text
+DB_URL=jdbc:postgresql://<host>:5432/<database>?sslmode=require
+DB_USERNAME=<database-user>
+DB_PASSWORD=<database-password>
+DB_DRIVER=org.postgresql.Driver
+DB_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+```
+
+Use the hostname, database name, user, and password supplied by Render. The application uses `spring.jpa.hibernate.ddl-auto=update`, so tables are created or updated on the first connection. The seed loader inserts sample products only when the product table is empty, preventing duplicate seed data on restarts.
 
 ## API
 
@@ -90,7 +106,7 @@ The response contains an `answer`, a `products` array populated from the databas
 
 ## How grounding works
 
-The assistant receives catalog candidates retrieved from MySQL and can call five Spring AI tools: name search, category search, budget search, details lookup, and product comparison. The system prompt restricts it to those returned results. The API also returns the database-derived product array separately, so clients can render authoritative product data without parsing the model text.
+The assistant receives catalog candidates retrieved from the configured database and can call five Spring AI tools: name search, category search, budget search, details lookup, and product comparison. The system prompt restricts it to those returned results. The API also returns the database-derived product array separately, so clients can render authoritative product data without parsing the model text.
 
 ## Developed By
 
