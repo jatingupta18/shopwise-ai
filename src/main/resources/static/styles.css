@@ -4613,6 +4613,366 @@ body.landing-page {
 
 
 /* =========================================================
+   40. THEME TOGGLE + ISLAND DARK MODE
+   ========================================================= */
+
+.theme-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 0 auto;
+    width: 62px;
+    height: 34px;
+    padding: 4px 6px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink-2);
+    background: var(--blue-soft);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    cursor: pointer;
+    transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
+}
+
+.theme-toggle:hover {
+    border-color: var(--blue-2);
+}
+
+.theme-toggle:focus-visible {
+    outline: 3px solid rgba(60, 140, 255, 0.45);
+    outline-offset: 3px;
+}
+
+.theme-toggle-icon {
+    z-index: 1;
+    width: 18px;
+    color: inherit;
+    font-size: 0.82rem;
+    line-height: 1;
+    text-align: center;
+}
+
+.theme-toggle-knob {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(21, 50, 81, 0.22);
+    transition: transform 180ms ease, background 180ms ease;
+}
+
+html[data-theme="dark"] {
+    --ink: #f7faff;
+    --ink-2: #d4dfef;
+    --muted: #b2c0d3;
+    --blue: #61a4ff;
+    --blue-2: #8bbcff;
+    --blue-soft: #172b47;
+    --green: #63ddb7;
+    --green-soft: #123b38;
+    --canvas: #07111f;
+    --surface: #111f33;
+    --line: #29425e;
+    --danger: #ff9d9d;
+    --danger-soft: #47252d;
+    --shadow: 0 30px 80px rgba(0, 0, 0, 0.42);
+}
+
+html[data-theme="dark"] body {
+    color: var(--ink);
+    background: radial-gradient(circle at 15% 0%, #142946 0, transparent 32rem), radial-gradient(circle at 100% 100%, #12344a 0, transparent 30rem), #07111f;
+}
+
+html[data-theme="dark"] .page-glow {
+    opacity: 0.22;
+}
+
+html[data-theme="dark"] .glow-one { background: #1d5b9d; }
+html[data-theme="dark"] .glow-two { background: #176e62; }
+
+html[data-theme="dark"] .assistant-card,
+html[data-theme="dark"] .checkout-card,
+html[data-theme="dark"] .confirmation-card,
+html[data-theme="dark"] .order-history-card {
+    border-color: #2a4462;
+    background: linear-gradient(145deg, rgba(19, 35, 55, 0.98), rgba(12, 25, 42, 0.98));
+    box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+html[data-theme="dark"] .app-header {
+    border-color: #2a4462;
+    background: rgba(16, 31, 51, 0.94);
+}
+
+html[data-theme="dark"] .brand small,
+html[data-theme="dark"] .status-copy small,
+html[data-theme="dark"] .home-link,
+html[data-theme="dark"] .composer-note,
+html[data-theme="dark"] .form-hint,
+html[data-theme="dark"] .history-subtitle,
+html[data-theme="dark"] .checkout-subtitle {
+    color: var(--muted);
+}
+
+html[data-theme="dark"] .home-link:hover {
+    color: #fff;
+    background: #203957;
+}
+
+html[data-theme="dark"] .home-link,
+html[data-theme="dark"] .cart-button {
+    border-color: #3a5b7e;
+    color: #eaf3ff;
+    background: #172b45;
+}
+
+html[data-theme="dark"] .cart-button:hover:not(:disabled) {
+    border-color: #75adf5;
+    background: #234464;
+}
+
+html[data-theme="dark"] .header-status {
+    border-color: #285d57;
+    background: #102f31;
+}
+
+html[data-theme="dark"] .status-copy b { color: #8ce8ca; }
+html[data-theme="dark"] .status-copy small { color: #b7d9d1; }
+
+html[data-theme="dark"] .theme-toggle {
+    border-color: #3b5a7d;
+    color: #eaf3ff;
+    background: #0d1b2d;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="dark"] .theme-toggle-knob {
+    transform: translateX(28px);
+    background: #61a4ff;
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.45);
+}
+
+html[data-theme="dark"] .messages,
+html[data-theme="dark"] .quick-prompts,
+html[data-theme="dark"] .composer {
+    background: transparent;
+}
+
+html[data-theme="dark"] .welcome-orb {
+    border-color: #345d8f;
+    color: #a9caff;
+    background: linear-gradient(145deg, #1b3354, #10233d);
+}
+
+html[data-theme="dark"] .welcome-copy,
+html[data-theme="dark"] .product-description,
+html[data-theme="dark"] .message-content p,
+html[data-theme="dark"] .empty-products p,
+html[data-theme="dark"] .cart-empty small,
+html[data-theme="dark"] .payment-info small,
+html[data-theme="dark"] .next-steps li,
+html[data-theme="dark"] .empty-orders-state small,
+html[data-theme="dark"] .error-state small {
+    color: var(--muted);
+}
+
+html[data-theme="dark"] .trust-row span,
+html[data-theme="dark"] .category,
+html[data-theme="dark"] .product-visual small,
+html[data-theme="dark"] .item-category,
+html[data-theme="dark"] .cart-item-category {
+    border-color: #31527a;
+    color: #c7ddff;
+    background: #182e4b;
+}
+
+html[data-theme="dark"] .assistant-message .message-content,
+html[data-theme="dark"] .initial-message .message-content,
+html[data-theme="dark"] .loading-message .message-content {
+    border-color: #2c4867;
+    color: var(--ink);
+    background: #162942;
+}
+
+html[data-theme="dark"] .assistant-message .message-label,
+html[data-theme="dark"] .message-label,
+html[data-theme="dark"] .products-label {
+    color: #c9d9ed;
+}
+
+html[data-theme="dark"] .user-message .message-content {
+    color: #fff;
+    background: linear-gradient(135deg, #196bd4, #1653ae);
+}
+
+html[data-theme="dark"] .user-message .message-label,
+html[data-theme="dark"] .user-message .message-label time {
+    color: #bddaff;
+}
+
+html[data-theme="dark"] .product-card,
+html[data-theme="dark"] .empty-products,
+html[data-theme="dark"] .checkout-section,
+html[data-theme="dark"] .checkout-cart-item,
+html[data-theme="dark"] .detail-card,
+html[data-theme="dark"] .next-steps,
+html[data-theme="dark"] .order-card,
+html[data-theme="dark"] .empty-orders-state,
+html[data-theme="dark"] .loading-state,
+html[data-theme="dark"] .error-state {
+    border-color: #2d4b6c;
+    background: #14263d;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.17);
+}
+
+html[data-theme="dark"] .product-card:hover,
+html[data-theme="dark"] .order-card:hover {
+    border-color: #5487c0;
+    background: #19304d;
+}
+
+html[data-theme="dark"] .product-visual {
+    border-color: #31557e;
+    background: linear-gradient(145deg, #1c3a5e, #142943);
+}
+
+html[data-theme="dark"] .product-card h3,
+html[data-theme="dark"] .cart-item-name,
+html[data-theme="dark"] .item-name,
+html[data-theme="dark"] .order-card h3,
+html[data-theme="dark"] .detail-value,
+html[data-theme="dark"] .total-value,
+html[data-theme="dark"] .delivery-value,
+html[data-theme="dark"] .cart-empty p,
+html[data-theme="dark"] .empty-orders-state p,
+html[data-theme="dark"] .error-state p {
+    color: #f8fbff;
+}
+
+html[data-theme="dark"] .product-price,
+html[data-theme="dark"] .item-price,
+html[data-theme="dark"] .line-total,
+html[data-theme="dark"] .cart-summary-row > span:last-child,
+html[data-theme="dark"] .total-row.main-total > span:last-child {
+    color: #9bc5ff;
+}
+
+html[data-theme="dark"] .card-button:not(.primary):not(.cart-button),
+html[data-theme="dark"] .retry-button,
+html[data-theme="dark"] .back-to-chat,
+html[data-theme="dark"] .quantity-btn,
+html[data-theme="dark"] .close-cart-button {
+    border-color: #3a5b7e;
+    color: #e8f2ff;
+    background: #1a304b;
+}
+
+html[data-theme="dark"] .card-button:not(.primary):not(.cart-button):hover,
+html[data-theme="dark"] .retry-button:hover,
+html[data-theme="dark"] .back-to-chat:hover,
+html[data-theme="dark"] .quantity-btn:hover,
+html[data-theme="dark"] .close-cart-button:hover {
+    border-color: #72a9ec;
+    background: #254568;
+}
+
+html[data-theme="dark"] .input-shell,
+html[data-theme="dark"] .form-group input,
+html[data-theme="dark"] .form-group textarea {
+    border-color: #3b5979;
+    color: #f7fbff;
+    background: #0e1d30;
+}
+
+html[data-theme="dark"] .input-shell:focus-within,
+html[data-theme="dark"] .form-group input:focus,
+html[data-theme="dark"] .form-group textarea:focus {
+    border-color: #75adf5;
+    box-shadow: 0 0 0 3px rgba(97, 164, 255, 0.22);
+}
+
+html[data-theme="dark"] textarea::placeholder,
+html[data-theme="dark"] .form-group input::placeholder,
+html[data-theme="dark"] .form-group textarea::placeholder {
+    color: #aebed2;
+}
+
+html[data-theme="dark"] .prompt-chip {
+    border-color: #2f4d6e;
+    color: #dce9fa;
+    background: #13263e;
+}
+
+html[data-theme="dark"] .prompt-chip:hover {
+    border-color: #679de1;
+    color: #fff;
+    background: #1a3454;
+}
+
+html[data-theme="dark"] .cart-drawer {
+    border-color: #2c4867;
+    background: #102137;
+    box-shadow: -20px 0 48px rgba(0, 0, 0, 0.42);
+}
+
+html[data-theme="dark"] .cart-header,
+html[data-theme="dark"] .cart-footer,
+html[data-theme="dark"] .cart-summary,
+html[data-theme="dark"] .cart-item,
+html[data-theme="dark"] .order-footer,
+html[data-theme="dark"] .checkout-totals,
+html[data-theme="dark"] .detail-item,
+html[data-theme="dark"] .info-item {
+    border-color: #2c4867;
+}
+
+html[data-theme="dark"] .cart-item {
+    background: #172a43;
+}
+
+html[data-theme="dark"] .cart-item:hover { background: #1c3452; }
+html[data-theme="dark"] .quantity-value,
+html[data-theme="dark"] .unit-price,
+html[data-theme="dark"] .item-quantity,
+html[data-theme="dark"] .item-qty,
+html[data-theme="dark"] .total-label,
+html[data-theme="dark"] .delivery-label,
+html[data-theme="dark"] .detail-label,
+html[data-theme="dark"] .info-item > span:first-child { color: var(--muted); }
+
+html[data-theme="dark"] .payment-info {
+    border-color: #2c6b61;
+    background: #123638;
+}
+
+html[data-theme="dark"] .payment-info strong,
+html[data-theme="dark"] .payment-info p,
+html[data-theme="dark"] .next-steps h2,
+html[data-theme="dark"] .checkout-section h2,
+html[data-theme="dark"] #checkout-title,
+html[data-theme="dark"] .confirmation-content h1,
+html[data-theme="dark"] .order-history-content h1,
+html[data-theme="dark"] .form-group label { color: #f7fbff; }
+
+html[data-theme="dark"] .cart-overlay { background: rgba(2, 8, 17, 0.68); }
+
+html[data-theme="dark"] .error-message .message-content,
+html[data-theme="dark"] .cart-error,
+html[data-theme="dark"] .error-state {
+    border-color: #73404b;
+    background: #39232d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-toggle,
+    .theme-toggle-knob { transition: none; }
+}
+
+
+/* =========================================================
    ACCESSIBILITY IMPROVEMENTS
    ========================================================= */
 
@@ -5292,4 +5652,117 @@ body.landing-page {
         justify-content: space-between;
         width: 100%;
     }
+}
+
+/* Final cascade layer: these shared header controls are also styled in cart sections above. */
+html[data-theme="dark"] .app-header .home-link,
+html[data-theme="dark"] .app-header .cart-button {
+    border-color: #3a5b7e;
+    color: #eaf3ff;
+    background: #172b45;
+}
+
+html[data-theme="dark"] .app-header .home-link:hover,
+html[data-theme="dark"] .app-header .cart-button:hover:not(:disabled) {
+    border-color: #75adf5;
+    color: #fff;
+    background: #234464;
+}
+
+html[data-theme="dark"] .composer .input-shell,
+html[data-theme="dark"] .composer .input-shell:focus-within,
+html[data-theme="dark"] .composer textarea,
+html[data-theme="dark"] .composer textarea:disabled {
+    border-color: #3b5979;
+    color: #f7fbff;
+    background: #0e1d30;
+}
+
+html[data-theme="dark"] .composer textarea:disabled {
+    opacity: 0.72;
+}
+
+html[data-theme="dark"] .composer textarea::placeholder {
+    color: #aebed2;
+}
+
+/* Landing page uses its own card system rather than the assistant shell. */
+html[data-theme="dark"] .landing-header {
+    border-color: #2a4462;
+    background: rgba(13, 27, 45, 0.94);
+}
+
+html[data-theme="dark"] .landing-nav a,
+html[data-theme="dark"] .hero-intro,
+html[data-theme="dark"] .about-card p,
+html[data-theme="dark"] .about-intro p,
+html[data-theme="dark"] .section-lead { color: #c4d2e5; }
+
+html[data-theme="dark"] .landing-nav a:hover { color: #9bc5ff; }
+
+html[data-theme="dark"] .landing-cta.secondary,
+html[data-theme="dark"] .landing-cta-band .landing-cta {
+    border-color: #3a5b7e;
+    color: #eaf3ff;
+    background: #172b45;
+}
+
+html[data-theme="dark"] .hero-photo img {
+    border-color: #244565;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34), 0 0 0 1px #355b83;
+}
+
+html[data-theme="dark"] .about-card,
+html[data-theme="dark"] .feature-card,
+html[data-theme="dark"] .steps li {
+    border-color: #2d4b6c;
+    color: #f7fbff;
+    background: #14263d;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.17);
+}
+
+html[data-theme="dark"] .feature-card:hover,
+html[data-theme="dark"] .steps li:hover,
+html[data-theme="dark"] .about-card:hover {
+    border-color: #5487c0;
+    background: #19304d;
+}
+
+html[data-theme="dark"] .feature-card p,
+html[data-theme="dark"] .steps p,
+html[data-theme="dark"] .about-meta-item span,
+html[data-theme="dark"] .hero-photo figcaption span,
+html[data-theme="dark"] .landing-footer { color: var(--muted); }
+
+html[data-theme="dark"] .about-meta-item strong,
+html[data-theme="dark"] .about-card h3,
+html[data-theme="dark"] .feature-card h3,
+html[data-theme="dark"] .steps strong { color: #f7fbff; }
+
+html[data-theme="dark"] .tech-list li,
+html[data-theme="dark"] .developer-links a {
+    border-color: #31527a;
+    color: #c7ddff;
+    background: #182e4b;
+}
+
+html[data-theme="dark"] .developer-links a:hover,
+html[data-theme="dark"] .tech-list li:hover {
+    border-color: #72a9ec;
+    color: #fff;
+    background: #234568;
+}
+
+html[data-theme="dark"] .nav-toggle {
+    border: 1px solid #3a5b7e;
+    background: #172b45;
+}
+
+html[data-theme="dark"] .nav-toggle span { background: #eaf3ff; }
+
+/* Cart header and footer have late translucent light declarations in the base layout. */
+html[data-theme="dark"] .cart-drawer .cart-header,
+html[data-theme="dark"] .cart-drawer .cart-footer {
+    border-color: #2c4867;
+    background: #102137;
 }
