@@ -43,6 +43,7 @@ public class ShoppingAgentService {
     private final ProductTools productTools;
     private final DatabaseShoppingFallback databaseFallback;
     private final DatabaseCartFallback databaseCartFallback;
+    private final DatabaseProductFallback databaseProductFallback;
     private final boolean fallbackEnabled;
     private final String provider;
 
@@ -50,6 +51,7 @@ public class ShoppingAgentService {
                                 ProductTools productTools,
                                 DatabaseShoppingFallback databaseFallback,
                                 DatabaseCartFallback databaseCartFallback,
+                                DatabaseProductFallback databaseProductFallback,
                                 @Value("${app.ai.fallback-enabled:true}") boolean fallbackEnabled,
                                 @Value("${app.ai.provider:ollama}") String provider) {
         ChatModel chatModel = chatModelProvider.getIfUnique();
@@ -57,6 +59,7 @@ public class ShoppingAgentService {
         this.productTools = productTools;
         this.databaseFallback = databaseFallback;
         this.databaseCartFallback = databaseCartFallback;
+        this.databaseProductFallback = databaseProductFallback;
         this.fallbackEnabled = fallbackEnabled;
         this.provider = provider;
     }
@@ -114,6 +117,10 @@ public class ShoppingAgentService {
             var cartResponse = databaseCartFallback.handle(message, guestToken);
             if (cartResponse.isPresent()) {
                 return cartResponse.get();
+            }
+            var productResponse = databaseProductFallback.handle(message);
+            if (productResponse.isPresent()) {
+                return productResponse.get();
             }
             return new ChatResponse(databaseFallback.fallbackAnswer(candidates), candidates, "database-fallback", true);
         }

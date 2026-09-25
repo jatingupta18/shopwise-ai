@@ -158,4 +158,64 @@ class AiCartOperationsIntegrationTest {
         assertThat(response.answer()).contains("Removed Dell Inspiron Laptop");
         assertThat(cartService.getCart(guestToken).items()).isEmpty();
     }
+
+    @Test
+    void fallback_ProductDetails_UsesThePersistedCatalogProduct() {
+        ChatResponse response = shoppingAgentService.chat("HP Pavilion laptop details", guestToken);
+
+        assertThat(response.fallbackUsed()).isTrue();
+        assertThat(response.answer()).contains("HP Pavilion Laptop", "Category: Electronics", "₹52000", "AMD Ryzen 5");
+        assertThat(response.products()).extracting(product -> product.id()).containsExactly(hpPavilion.getId());
+    }
+
+    @Test
+    void fallback_HinglishProductDetails_UsesThePersistedCatalogProduct() {
+        ChatResponse response = shoppingAgentService.chat("Dell Inspiron ke baare me batao", guestToken);
+
+        assertThat(response.fallbackUsed()).isTrue();
+        assertThat(response.answer()).contains("Dell Inspiron Laptop", "₹55000", "Intel i5");
+        assertThat(response.products()).extracting(product -> product.id()).containsExactly(dellInspiron.getId());
+    }
+
+    @Test
+    void fallback_UnknownOrAmbiguousProductDetails_DoNotGuess() {
+        productRepository.save(new Product(
+                "Dell Inspiron 14", "14-inch FHD, Intel i3", new BigDecimal("48000"), "Electronics"));
+
+        ChatResponse unknown = shoppingAgentService.chat("Unknown device details", guestToken);
+        ChatResponse ambiguous = shoppingAgentService.chat("Dell Inspiron details", guestToken);
+
+        assertThat(unknown.answer()).contains("could not identify one exact catalog product");
+        assertThat(unknown.products()).isEmpty();
+        assertThat(ambiguous.answer()).contains("could not identify one exact catalog product");
+        assertThat(ambiguous.products()).isEmpty();
+    }
+
+    @Test
+    void fallback_ComparisonOfTwoNamedProducts_UsesPersistedValues() {
+        ChatResponse response = shoppingAgentService.chat("compare HP Pavilion and Dell Inspiron Laptop", guestToken);
+
+        assertThat(response.fallbackUsed()).isTrue();
+        assertThat(response.answer()).contains("Database catalog comparison", "HP Pavilion Laptop", "Dell Inspiron Laptop", "₹52000", "₹55000");
+        assertThat(response.products()).extracting(product -> product.id())
+                .containsExactlyInAnyOrder(hpPavilion.getId(), dellInspiron.getId());
+    }
+
+    @Test
+    void fallback_ComparisonWithOtherAvailableProducts_UsesRelevantCategory() {
+        ChatResponse response = shoppingAgentService.chat("Compare Dell Inspiron Laptop with other available products", guestToken);
+
+        assertThat(response.fallbackUsed()).isTrue();
+        assertThat(response.answer()).contains("Database catalog comparison", "Dell Inspiron Laptop", "HP Pavilion Laptop");
+        assertThat(response.products()).extracting(product -> product.category()).containsOnly("Electronics");
+        assertThat(response.products()).extracting(product -> product.id()).contains(dellInspiron.getId());
+    }
+
+    @Test
+    void fallback_AmbiguousComparison_AsksForBothProductNames() {
+        ChatResponse response = shoppingAgentService.chat("compare these laptops", guestToken);
+
+        assertThat(response.fallbackUsed()).isTrue();
+        assertThat(response.answer()).contains("could not identify two exact catalog products");
+    }
 }

@@ -27,6 +27,8 @@ public class DatabaseShoppingFallback {
     private static final Pattern CART_OPERATION_INTENT = Pattern.compile(
             "(?:cart|add\\s+to\\s+cart|cart\\s+me|remove\\s+from\\s+cart|cart\\s+se|show\\s+my\\s+cart|mera\\s+cart|cart\\s+dikhao)",
             Pattern.CASE_INSENSITIVE);
+    private static final Pattern OTHER_AVAILABLE_COMPARISON = Pattern.compile(
+            "(?:other\\s+available|other\\s+products|available\\s+products)", Pattern.CASE_INSENSITIVE);
     private static final String COUNT_TOKEN = "(\\d+|two|three|four|five|six|seven|eight|nine|ten)";
     private static final String NOT_SPEC_UNIT = "(?!\\s*(?:gb|tb|mb|kb|ghz|mhz|hz|inch(?:es)?|mp|mah|ram|ssd|hdd|nvme|cores?)\\b)";
     /**
@@ -102,6 +104,9 @@ public class DatabaseShoppingFallback {
     public boolean needsComparisonShortCircuit(String message, List<ProductSummary> products) {
         // Don't short-circuit if this is a cart operation - let the AI handle it with tools
         if (isCartOperation(message)) {
+            return false;
+        }
+        if (OTHER_AVAILABLE_COMPARISON.matcher(message).find()) {
             return false;
         }
         OptionalInt requested = requestedComparisonCount(message);

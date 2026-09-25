@@ -46,6 +46,9 @@ class ShoppingAgentServiceTest {
     @Mock
     private DatabaseCartFallback databaseCartFallback;
 
+    @Mock
+    private DatabaseProductFallback databaseProductFallback;
+
     private ShoppingAgentService shoppingAgentService;
 
     @BeforeEach
@@ -55,10 +58,12 @@ class ShoppingAgentServiceTest {
                 new ProductTools(productService, cartService),
                 databaseFallback,
                 databaseCartFallback,
+                databaseProductFallback,
                 true,
                 "test"
         );
         when(databaseCartFallback.handle(any(), any())).thenReturn(Optional.empty());
+        when(databaseProductFallback.handle(any())).thenReturn(Optional.empty());
     }
 
     @Test
@@ -106,7 +111,7 @@ class ShoppingAgentServiceTest {
                 List.of(new Generation(new AssistantMessage("The Budget Laptop is within your budget.")))));
 
         ShoppingAgentService service = new ShoppingAgentService(
-                chatModelProvider, new ProductTools(productService, cartService), databaseFallback, databaseCartFallback, true, "ollama");
+                chatModelProvider, new ProductTools(productService, cartService), databaseFallback, databaseCartFallback, databaseProductFallback, true, "ollama");
 
         com.jatin.ai_shopping_agent.dto.ChatResponse response = service.chat("I need a laptop under 60000");
 
@@ -130,7 +135,7 @@ class ShoppingAgentServiceTest {
         when(chatModel.call(any(Prompt.class))).thenThrow(new RuntimeException("Connection refused"));
 
         ShoppingAgentService service = new ShoppingAgentService(
-                chatModelProvider, new ProductTools(productService, cartService), databaseFallback, databaseCartFallback, true, "ollama");
+                chatModelProvider, new ProductTools(productService, cartService), databaseFallback, databaseCartFallback, databaseProductFallback, true, "ollama");
 
         com.jatin.ai_shopping_agent.dto.ChatResponse response = service.chat("I need a laptop under 60000");
 
