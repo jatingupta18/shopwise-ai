@@ -24,6 +24,9 @@ Application settings come from environment variables. No secrets should be commi
 | `AI_PROVIDER` | `ollama` | Label returned in chat responses |
 | `OLLAMA_BASE_URL` | `http://localhost:11434` | Local Ollama server URL |
 | `OLLAMA_MODEL` | `llama3.2` | Ollama chat model |
+| `OLLAMA_MAX_RETRY_ATTEMPTS` | `1` | Spring AI attempts for an unavailable Ollama provider |
+| `OLLAMA_CONNECT_TIMEOUT` | `2s` | Maximum time to establish an Ollama connection |
+| `OLLAMA_READ_TIMEOUT` | `15s` | Maximum time waiting for an Ollama response |
 | `AI_FALLBACK_ENABLED` | `true` | Return database-only matches if an AI provider is unavailable |
 
 ### Free local AI: Ollama (default)
@@ -36,6 +39,7 @@ ollama serve
 ```
 
 The application defaults to Ollama. When it is unavailable, the chat endpoint safely returns a deterministic database-only result set when `AI_FALLBACK_ENABLED=true`.
+Ollama connection failures are attempted once by default, so unavailable production instances return the database fallback without Spring AI's exponential retry delay. Increase the timeout values only when a reachable Ollama server needs more time to respond.
 
 ### Optional OpenAI provider
 
