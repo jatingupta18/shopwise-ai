@@ -41,6 +41,8 @@ class AiCartOperationsIntegrationTest {
     private ShoppingAgentService shoppingAgentService;
 
     private Product testProduct;
+    private Product dellInspiron;
+    private Product hpPavilion;
     private String guestToken = "test-guest-token";
 
     @BeforeEach
@@ -55,6 +57,11 @@ class AiCartOperationsIntegrationTest {
         testProduct.setPrice(new BigDecimal("45000"));
         testProduct.setDescription("Test laptop for AI cart operations");
         testProduct = productRepository.save(testProduct);
+
+        dellInspiron = productRepository.save(new Product(
+                "Dell Inspiron Laptop", "15.6-inch FHD, Intel i5", new BigDecimal("55000"), "Electronics"));
+        hpPavilion = productRepository.save(new Product(
+                "HP Pavilion Laptop", "14-inch HD, AMD Ryzen 5", new BigDecimal("52000"), "Electronics"));
 
         // Create a cart with the guest token
         Cart cart = new Cart();
@@ -98,5 +105,57 @@ class AiCartOperationsIntegrationTest {
         var finalCart = cartService.getCart(guestToken);
         assertThat(finalCart.itemCount()).isEqualTo(1);
         assertThat(finalCart.items().get(0).productId()).isEqualTo(testProduct.getId());
+    }
+
+    @Test
+    void fallback_AddToCart_UsesTheRealCatalogProduct() {
+        ChatResponse response = shoppingAgentService.chat("add Dell Inspiron laptop to cart", guestToken);
+
+        assertThat(response.fallbackUsed()).isTrue();
+        assertThat(response.answer()).contains("Added Dell Inspiron Laptop");
+        assertThat(cartService.getCart(guestToken).items())
+                .extracting(item -> item.productId())
+                .containsExactly(dellInspiron.getId());
+    }
+
+    @Test
+    void fallback_HinglishAddToCart_UsesTheRealCatalogProduct() {
+        ChatResponse response = shoppingAgentService.chat("Dell Inspiron laptop ko cart me add karo", guestToken);
+
+        assertThat(response.fallbackUsed()).isTrue();
+        assertThat(response.answer()).contains("Added Dell Inspiron Laptop");
+        assertThat(cartService.getCart(guestToken).items()).hasSize(1);
+    }
+
+    @Test
+    void fallback_GetCartImmediatelyAfterAdd_ReturnsPersistedCart() {
+        shoppingAgentService.chat("cart me HP Pavilion add karo", guestToken);
+
+        ChatResponse response = shoppingAgentService.chat("show my cart", guestToken);
+
+        assertThat(response.fallbackUsed()).isTrue();
+        assertThat(response.answer()).contains("HP Pavilion Laptop x1");
+        assertThat(response.products()).extracting(product -> product.id()).containsExactly(hpPavilion.getId());
+    }
+
+    @Test
+    void fallback_HinglishGetCart_PersistsAcrossSequentialRequests() {
+        shoppingAgentService.chat("Dell Inspiron laptop ko cart me add karo", guestToken);
+
+        ChatResponse response = shoppingAgentService.chat("mera cart dikhao", guestToken);
+
+        assertThat(response.answer()).contains("Dell Inspiron Laptop x1");
+        assertThat(cartService.getCart(guestToken).items()).hasSize(1);
+    }
+
+    @Test
+    void fallback_RemoveFromCart_UsesPersistedCartItemId() {
+        shoppingAgentService.chat("add Dell Inspiron laptop to cart", guestToken);
+
+        ChatResponse response = shoppingAgentService.chat("remove Dell Inspiron from cart", guestToken);
+
+        assertThat(response.fallbackUsed()).isTrue();
+        assertThat(response.answer()).contains("Removed Dell Inspiron Laptop");
+        assertThat(cartService.getCart(guestToken).items()).isEmpty();
     }
 }

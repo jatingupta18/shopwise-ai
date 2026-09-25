@@ -42,18 +42,21 @@ public class ShoppingAgentService {
     private final ChatClient chatClient;
     private final ProductTools productTools;
     private final DatabaseShoppingFallback databaseFallback;
+    private final DatabaseCartFallback databaseCartFallback;
     private final boolean fallbackEnabled;
     private final String provider;
 
     public ShoppingAgentService(ObjectProvider<ChatModel> chatModelProvider,
                                 ProductTools productTools,
                                 DatabaseShoppingFallback databaseFallback,
+                                DatabaseCartFallback databaseCartFallback,
                                 @Value("${app.ai.fallback-enabled:true}") boolean fallbackEnabled,
                                 @Value("${app.ai.provider:ollama}") String provider) {
         ChatModel chatModel = chatModelProvider.getIfUnique();
         this.chatClient = chatModel == null ? null : ChatClient.create(chatModel);
         this.productTools = productTools;
         this.databaseFallback = databaseFallback;
+        this.databaseCartFallback = databaseCartFallback;
         this.fallbackEnabled = fallbackEnabled;
         this.provider = provider;
     }
@@ -71,7 +74,7 @@ public class ShoppingAgentService {
             return new ChatResponse(answer, databaseCandidates, "database-catalog", true);
         }
         if (chatClient == null) {
-            return fallbackOrThrow(databaseCandidates, null);
+            return fallbackOrThrow(message, guestToken, databaseCandidates, null);
         }
 
         try {
@@ -102,12 +105,16 @@ public class ShoppingAgentService {
                     .content();
             return new ChatResponse(answer, databaseCandidates, provider, false);
         } catch (RuntimeException exception) {
-            return fallbackOrThrow(databaseCandidates, exception);
+            return fallbackOrThrow(message, guestToken, databaseCandidates, exception);
         }
     }
 
-    private ChatResponse fallbackOrThrow(List<ProductSummary> candidates, RuntimeException cause) {
+    private ChatResponse fallbackOrThrow(String message, String guestToken, List<ProductSummary> candidates, RuntimeException cause) {
         if (fallbackEnabled) {
+            var cartResponse = databaseCartFallback.handle(message, guestToken);
+            if (cartResponse.isPresent()) {
+                return cartResponse.get();
+            }
             return new ChatResponse(databaseFallback.fallbackAnswer(candidates), candidates, "database-fallback", true);
         }
         throw new AiProviderUnavailableException("The configured AI provider is unavailable. Configure Ollama or enable the database fallback.", cause);
