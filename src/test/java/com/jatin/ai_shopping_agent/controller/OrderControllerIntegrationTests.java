@@ -121,7 +121,7 @@ class OrderControllerIntegrationTests {
             .andExpect(jsonPath("$.customerPinCode").value("123456"))
             .andExpect(jsonPath("$.totalAmount").value(1999.98))
             .andExpect(jsonPath("$.itemCount").value(2))
-            .andExpect(jsonPath("$.status").value("PENDING"))
+            .andExpect(jsonPath("$.status").value("CONFIRMED"))
             .andExpect(jsonPath("$.items").isArray())
             .andExpect(jsonPath("$.items.length()").value(1));
     }
@@ -273,7 +273,8 @@ class OrderControllerIntegrationTests {
             .andExpect(jsonPath("$").isArray())
             .andExpect(jsonPath("$.length()").value(1))
             .andExpect(jsonPath("$[0].orderNumber").exists())
-            .andExpect(jsonPath("$[0].customerName").value("John Doe"));
+            .andExpect(jsonPath("$[0].customerName").value("John Doe"))
+            .andExpect(jsonPath("$[0].status").value("CONFIRMED"));
     }
 
     @Test

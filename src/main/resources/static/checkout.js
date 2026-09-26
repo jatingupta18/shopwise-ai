@@ -124,13 +124,13 @@ async function handleCheckout(event) {
 }
 
 async function processMockPayment() {
-    updatePaymentStatus("processing", "Processing payment...");
+    updatePaymentStatus("processing", "Processing demo payment...");
 
     // Simulate payment processing delay
     await new Promise(resolve => setTimeout(resolve, 2000));
 
     // Mock payment always succeeds in this demo
-    updatePaymentStatus("success", "Payment successful");
+    updatePaymentStatus("success", "Demo payment successful");
 }
 
 async function createOrder() {
@@ -162,11 +162,11 @@ async function createOrder() {
 
 function showOrderSuccess(orderData) {
     orderNumber.textContent = orderData.orderNumber;
-    orderStatus.textContent = "Confirmed";
+    orderStatus.textContent = orderData.status;
     orderStatus.style.color = "#0a8e6f";
 
     // Show success message
-    alert(`Order placed successfully!\n\nOrder Number: ${orderData.orderNumber}\nTotal: ${formatPrice(orderData.totalAmount)}\n\nThank you for your order!`);
+    alert(`Demo order placed successfully!\n\nOrder Number: ${orderData.orderNumber}\nTotal: ${formatPrice(orderData.totalAmount)}\n\nNo real payment was processed.`);
 
     // Redirect to confirmation page after short delay
     setTimeout(() => {

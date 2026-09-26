@@ -107,7 +107,7 @@ class OrderServiceIntegrationTests {
         assertEquals("123456", response.customerPinCode());
         assertEquals(new BigDecimal("1999.98"), response.totalAmount());
         assertEquals(2, response.itemCount());
-        assertEquals("PENDING", response.status());
+        assertEquals("CONFIRMED", response.status());
         assertNotNull(response.items());
         assertEquals(1, response.items().size());
     }
@@ -166,7 +166,7 @@ class OrderServiceIntegrationTests {
         assertEquals("123456", order.getCustomerPinCode());
         assertEquals(new BigDecimal("1999.98"), order.getTotalAmount());
         assertEquals(2, order.getItemCount());
-        assertEquals(Order.OrderStatus.PENDING, order.getStatus());
+        assertEquals(Order.OrderStatus.CONFIRMED, order.getStatus());
         assertEquals("test-token", order.getGuestToken());
         assertNotNull(order.getCreatedAt());
         assertNotNull(order.getUpdatedAt());
@@ -229,6 +229,19 @@ class OrderServiceIntegrationTests {
         assertEquals(1, orders.size());
         assertEquals(response.orderNumber(), orders.get(0).orderNumber());
         assertTrue(orders.get(0).orderNumber().startsWith("ORD-"));
+        assertEquals("CONFIRMED", orders.get(0).status());
+    }
+
+    @Test
+    void orderStatusEnumRetainsFulfillmentLifecycleStatuses() {
+        assertThat(Order.OrderStatus.values()).contains(
+                Order.OrderStatus.PENDING,
+                Order.OrderStatus.CONFIRMED,
+                Order.OrderStatus.PROCESSING,
+                Order.OrderStatus.SHIPPED,
+                Order.OrderStatus.DELIVERED,
+                Order.OrderStatus.CANCELLED
+        );
     }
 
 }

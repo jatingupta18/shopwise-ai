@@ -56,7 +56,8 @@ public class OrderService {
         order.setCustomerState(checkoutRequest.state());
         order.setCustomerPinCode(checkoutRequest.pinCode());
         order.setGuestToken(guestToken);
-        order.setStatus(Order.OrderStatus.PENDING);
+        // This endpoint is called only after the existing demo payment step succeeds.
+        order.setStatus(Order.OrderStatus.CONFIRMED);
 
         // Calculate totals and create order items
         BigDecimal totalAmount = BigDecimal.ZERO;
