@@ -5766,3 +5766,79 @@ html[data-theme="dark"] .cart-drawer .cart-footer {
     border-color: #2c4867;
     background: #102137;
 }
+
+/* Final Dark Mode contrast audit: override late page-specific light surfaces. */
+html[data-theme="dark"] {
+    --ink-2: #dde8f6;
+    --muted: #c2d0e1;
+}
+
+html[data-theme="dark"] .confirmation-details,
+html[data-theme="dark"] .order-items-preview,
+html[data-theme="dark"] .payment-status,
+html[data-theme="dark"] .empty-cart-message {
+    border: 1px solid #2d4b6c;
+    background: #14263d;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.17);
+}
+
+html[data-theme="dark"] .confirmation-subtitle,
+html[data-theme="dark"] .detail-label,
+html[data-theme="dark"] .order-label,
+html[data-theme="dark"] .date-label,
+html[data-theme="dark"] .items-label,
+html[data-theme="dark"] .item-qty,
+html[data-theme="dark"] .status-text,
+html[data-theme="dark"] .loading-state p,
+html[data-theme="dark"] .empty-cart-message p {
+    color: var(--muted);
+}
+
+html[data-theme="dark"] .order-value,
+html[data-theme="dark"] .date-value,
+html[data-theme="dark"] .item-preview .item-name,
+html[data-theme="dark"] .empty-cart-message p {
+    color: #f8fbff;
+}
+
+html[data-theme="dark"] .confirmation-actions .action-button.secondary,
+html[data-theme="dark"] .retry-button,
+html[data-theme="dark"] .back-to-chat {
+    border-color: #4a6d93;
+    color: #edf5ff;
+    background: #1a304b;
+}
+
+html[data-theme="dark"] .confirmation-actions .action-button.secondary:hover,
+html[data-theme="dark"] .retry-button:hover,
+html[data-theme="dark"] .back-to-chat:hover {
+    border-color: #80b2ee;
+    color: #fff;
+    background: #254568;
+}
+
+html[data-theme="dark"] .status-pending { color: #ffd795; background: #4a3414; }
+html[data-theme="dark"] .status-confirmed,
+html[data-theme="dark"] .detail-value.status.confirmed { color: #8df0c9; background: #143f36; }
+html[data-theme="dark"] .status-processing { color: #b8d5ff; background: #183b70; }
+html[data-theme="dark"] .status-shipped { color: #c9c8ff; background: #302e6e; }
+html[data-theme="dark"] .status-delivered { color: #99edcf; background: #17483d; }
+html[data-theme="dark"] .status-cancelled { color: #ffb6b6; background: #542c36; }
+
+html[data-theme="dark"] .status-indicator.ready { background: #aebed2; }
+html[data-theme="dark"] .status-text { font-weight: 600; }
+
+html[data-theme="dark"] .form-group input::placeholder,
+html[data-theme="dark"] .form-group textarea::placeholder,
+html[data-theme="dark"] .composer textarea::placeholder { color: #c2d0e1; }
+
+html[data-theme="dark"] .send-button:disabled,
+html[data-theme="dark"] .checkout-button:disabled,
+html[data-theme="dark"] .checkout-submit-button:disabled,
+html[data-theme="dark"] .prompt-chip:disabled,
+html[data-theme="dark"] .quantity-btn:disabled {
+    color: #dce9fa;
+    background: #1a304b;
+    border-color: #3b5979;
+    opacity: 0.76;
+}
