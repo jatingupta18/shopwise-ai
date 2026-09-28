@@ -151,7 +151,43 @@ public class DatabaseProductFallback {
     }
 
     private boolean sameCategory(Product first, Product second) {
-        return first.getCategory() != null && first.getCategory().equalsIgnoreCase(second.getCategory());
+        if (first.getCategory() != null && first.getCategory().equalsIgnoreCase(second.getCategory())) {
+            String category = first.getCategory().toLowerCase(Locale.ROOT);
+            if (category.equals("electronics") || category.equals("general")) {
+                return sameProductType(first.getName(), second.getName());
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private boolean sameProductType(String name1, String name2) {
+        String type1 = extractProductType(name1);
+        String type2 = extractProductType(name2);
+        if (type1 == null || type2 == null) {
+            return false;
+        }
+        return type1.equals(type2);
+    }
+
+    private String extractProductType(String productName) {
+        if (productName == null) {
+            return null;
+        }
+        String lower = productName.toLowerCase(Locale.ROOT);
+        if (lower.contains("laptop")) {
+            return "laptop";
+        }
+        if (lower.contains("phone") || lower.contains("galaxy") || lower.contains("pixel") || lower.contains("oneplus")) {
+            return "phone";
+        }
+        if (lower.contains("headphone") || lower.contains("wh-") || lower.contains("quietcomfort")) {
+            return "headphone";
+        }
+        if (lower.contains("speaker") || lower.contains("flip") || lower.contains("jbl")) {
+            return "speaker";
+        }
+        return null;
     }
 
     private String safeDescription(Product product) {
