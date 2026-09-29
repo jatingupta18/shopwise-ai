@@ -2201,22 +2201,83 @@ body.landing-page {
     }
 
     .app-header {
-        padding: 17px 18px;
+        padding: 12px 14px;
+        gap: 10px;
+    }
+
+    .brand {
+        gap: 8px;
+    }
+
+    .brand-symbol {
+        width: 38px;
+        height: 38px;
     }
 
     .brand small {
-        font-size: 0.55rem;
+        font-size: 0.5rem;
+        letter-spacing: 0.08em;
+    }
+
+    .brand strong {
+        font-size: 0.9rem;
+    }
+
+    .header-actions {
+        gap: 6px;
+    }
+
+    .home-link {
+        padding: 6px 8px;
+        font-size: 0.65rem;
+    }
+
+    .cart-button {
+        min-width: 36px;
+        min-height: 36px;
+        padding: 6px;
+    }
+
+    .cart-icon {
+        font-size: 1rem;
+    }
+
+    .theme-toggle {
+        width: 52px;
+        height: 28px;
+        padding: 3px 5px;
+    }
+
+    .theme-toggle-icon {
+        width: 16px;
+        font-size: 0.7rem;
+    }
+
+    .theme-toggle-knob {
+        width: 20px;
+        height: 20px;
+        top: 3px;
+        left: 3px;
+    }
+
+    html[data-theme="dark"] .theme-toggle-knob {
+        transform: translateX(24px);
     }
 
     .header-status {
-        width: 31px;
-        height: 31px;
+        width: 28px;
+        height: 28px;
 
         justify-content: center;
 
         padding: 0;
 
-        border-radius: 10px;
+        border-radius: 8px;
+    }
+
+    .online-dot {
+        width: 6px;
+        height: 6px;
     }
 
     .status-copy {
@@ -2318,6 +2379,102 @@ body.landing-page {
    Small Landing Page Adjustments
    ========================================================= */
 
+/* Extra narrow mobile header fix for 360px width */
+@media (max-width: 380px) {
+
+    .app-header {
+        padding: 10px 12px;
+        gap: 8px;
+    }
+
+    .brand {
+        gap: 6px;
+        min-width: 0;
+        flex: 0 0 auto;
+    }
+
+    .brand-symbol {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+    }
+
+    .brand small {
+        display: none;
+    }
+
+    .brand strong {
+        font-size: 0.85rem;
+    }
+
+    .header-actions {
+        gap: 4px;
+        flex: 0 0 auto;
+    }
+
+    .home-link {
+        padding: 5px 6px;
+        font-size: 0.6rem;
+        display: none;
+    }
+
+    .home-link:first-of-type {
+        display: inline-flex;
+    }
+
+    .cart-button {
+        min-width: 32px;
+        min-height: 32px;
+        padding: 5px;
+    }
+
+    .cart-icon {
+        font-size: 0.9rem;
+    }
+
+    .cart-badge {
+        min-width: 14px;
+        height: 14px;
+        font-size: 0.55rem;
+        line-height: 14px;
+        top: 3px;
+        right: 3px;
+    }
+
+    .theme-toggle {
+        width: 48px;
+        height: 26px;
+        padding: 3px 4px;
+    }
+
+    .theme-toggle-icon {
+        width: 14px;
+        font-size: 0.65rem;
+    }
+
+    .theme-toggle-knob {
+        width: 18px;
+        height: 18px;
+        top: 3px;
+        left: 3px;
+    }
+
+    html[data-theme="dark"] .theme-toggle-knob {
+        transform: translateX(22px);
+    }
+
+    .header-status {
+        width: 26px;
+        height: 26px;
+        padding: 0;
+    }
+
+    .online-dot {
+        width: 5px;
+        height: 5px;
+    }
+}
+
 @media (max-width: 420px) {
 
     .hero-copy h1 {
@@ -2398,7 +2555,7 @@ body.landing-page {
 }
 
 /* =========================================================
-   FINAL LANDING PAGE POLISH
+   44. FINAL LANDING PAGE POLISH
    ========================================================= */
 
 /* Smooth section spacing */
@@ -3021,7 +3178,7 @@ body.landing-page {
 
 
 /* =========================================================
-   38. SHOPPING CART
+   44. SHOPPING CART
    ========================================================= */
 
 
@@ -4613,7 +4770,7 @@ body.landing-page {
 
 
 /* =========================================================
-   40. THEME TOGGLE + ISLAND DARK MODE
+   46. THEME TOGGLE + ISLAND DARK MODE
    ========================================================= */
 
 .theme-toggle {
@@ -5008,7 +5165,7 @@ html[data-theme="dark"] .error-state {
 
 
 /* =========================================================
-   39. CHECKOUT PAGE
+   45. CHECKOUT PAGE
    ========================================================= */
 
 .checkout-page .app-shell {
