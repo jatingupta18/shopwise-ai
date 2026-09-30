@@ -1581,14 +1581,14 @@ body.landing-page {
     display: grid;
 
     grid-template-columns:
-        minmax(0, 1.15fr)
-        minmax(240px, 320px);
+        minmax(0, 1.1fr)
+        minmax(280px, 400px);
 
     align-items: center;
 
-    gap: clamp(28px, 5vw, 56px);
+    gap: clamp(32px, 5vw, 64px);
 
-    padding: 48px 0 28px;
+    padding: 52px 0 32px;
 
     animation: rise 0.5s ease-out;
 }
@@ -1688,46 +1688,29 @@ body.landing-page {
 
 
 /* =========================================================
-   30. HERO PHOTO
+   30. HERO PREVIEW
    ========================================================= */
 
-.hero-photo {
+.hero-preview {
     margin: 0;
 
     text-align: center;
 }
 
-.hero-photo img {
-    width: min(260px, 72vw);
-    height: min(260px, 72vw);
-
-    object-fit: cover;
-
-    object-position: center top;
-
-    border: 5px solid #fff;
-
-    border-radius: 32px;
-
-    box-shadow:
-        0 18px 40px rgba(23, 105, 224, 0.16),
-        0 0 0 1px #d7e6f4;
-}
-
-.hero-photo figcaption {
+.hero-preview figcaption {
     margin-top: 12px;
 }
 
-.hero-photo figcaption strong,
-.hero-photo figcaption span {
+.hero-preview figcaption strong,
+.hero-preview figcaption span {
     display: block;
 }
 
-.hero-photo figcaption strong {
+.hero-preview figcaption strong {
     font-size: 0.95rem;
 }
 
-.hero-photo figcaption span {
+.hero-preview figcaption span {
     margin-top: 3px;
 
     color: var(--muted);
@@ -2481,9 +2464,8 @@ body.landing-page {
         font-size: 1.8rem;
     }
 
-    .hero-photo img {
-        width: 230px;
-        height: 230px;
+    .assistant-preview {
+        max-width: 100%;
     }
 
     .landing-cta {
@@ -2564,14 +2546,14 @@ body.landing-page {
 }
 
 /* Improve hero photo presentation */
-.hero-photo {
+.hero-preview {
     transform: translateY(-4px);
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
 }
 
-.hero-photo:hover {
+.hero-preview:hover {
     transform: translateY(-8px);
 
     box-shadow:
@@ -2660,7 +2642,7 @@ body.landing-page {
 
 @media (max-width: 700px) {
 
-    .hero-photo:hover {
+    .hero-preview:hover {
         transform: translateY(-4px);
     }
 
@@ -2678,7 +2660,7 @@ body.landing-page {
     }
 }
 /* =========================================================
-   DEVELOPER PROFILE
+   ABOUT SECTION
    ========================================================= */
 
 .about-intro {
@@ -2698,7 +2680,7 @@ body.landing-page {
 }
 
 
-/* Profile information */
+/* Project information */
 
 .about-meta {
     flex: 0.8;
@@ -2742,9 +2724,70 @@ body.landing-page {
     .about-meta {
         width: 100%;
     }
+
+    .assistant-preview {
+        max-width: 100%;
+    }
+
+    .preview-header {
+        padding: 14px 18px;
+    }
+
+    .preview-brand {
+        font-size: 0.82rem;
+    }
+
+    .preview-status {
+        font-size: 0.65rem;
+    }
+
+    .preview-chat {
+        padding: 16px 18px;
+        min-height: 160px;
+    }
+
+    .preview-message {
+        margin-bottom: 14px;
+    }
+
+    .preview-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 0.72rem;
+    }
+
+    .preview-label {
+        font-size: 0.58rem;
+    }
+
+    .preview-content p {
+        font-size: 0.8rem;
+        padding: 10px 12px;
+    }
+
+    .preview-products {
+        padding: 14px 18px;
+    }
+
+    .preview-product-card {
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+
+    .preview-product-icon {
+        font-size: 1.4rem;
+    }
+
+    .preview-product-name {
+        font-size: 0.78rem;
+    }
+
+    .preview-product-price {
+        font-size: 0.72rem;
+    }
 }
 /* =========================================
-   HERO POLISH
+   PROJECT SECTION POLISH
    ========================================= */
 
 /* Make the main tagline more prominent */
@@ -2793,40 +2836,165 @@ body.landing-page {
     box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12);
 }
 /* =========================================
-   HERO PHOTO - SUBTLE POLISH
+   HERO PREVIEW - ASSISTANT INTERFACE
    ========================================= */
 
-.hero-photo {
+.hero-preview {
     position: relative;
 }
 
-/* Soft circular background behind the photo */
-.hero-photo::before {
-    content: "";
-    position: absolute;
-
-    width: 360px;
-    height: 360px;
-
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
-    border: 1px solid rgba(37, 99, 235, 0.12);
-    border-radius: 50%;
-
-    box-shadow:
-        0 0 0 28px rgba(37, 99, 235, 0.025),
-        0 0 0 56px rgba(37, 99, 235, 0.018);
-
-    pointer-events: none;
+/* Assistant preview container */
+.assistant-preview {
+    background: #fff;
+    border: 1px solid #d7e6f4;
+    border-radius: 20px;
+    box-shadow: 0 24px 60px rgba(23, 105, 224, 0.15), 0 0 0 1px rgba(23, 105, 224, 0.08);
+    overflow: hidden;
+    max-width: 420px;
+    margin: 0 auto;
 }
 
-/* Keep the actual photo above the decorative circle */
-.hero-photo img {
-    position: relative;
-    z-index: 1;
+.preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    border-bottom: 1px solid #eef4f9;
+    background: linear-gradient(180deg, #fff 0%, #f8fbff 100%);
+}
+
+.preview-brand {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+}
+
+.preview-status {
+    font-size: 0.7rem;
+    color: #10b981;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.preview-chat {
+    padding: 20px 24px;
+    background: #f5f8fc;
+    min-height: 200px;
+}
+
+.preview-message {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.preview-message.assistant {
+    flex-direction: row;
+}
+
+.preview-message.user {
+    flex-direction: row-reverse;
+}
+
+.preview-avatar {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.preview-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.preview-label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #64748b;
+    letter-spacing: 0.1em;
+    margin-bottom: 5px;
+}
+
+.preview-content p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--ink-2);
+    line-height: 1.55;
+    background: #fff;
+    padding: 12px 16px;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 10px rgba(16, 42, 67, 0.06);
+}
+
+.preview-message.user .preview-content p {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #fff;
+    border-color: #bfdbfe;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+}
+
+.preview-products {
+    padding: 18px 24px;
+    background: #fff;
+    border-top: 1px solid #eef4f9;
+}
+
+.preview-product-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.preview-product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 42, 67, 0.08);
+}
+
+.preview-product-card:last-child {
+    margin-bottom: 0;
+}
+
+.preview-product-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+}
+
+.preview-product-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.preview-product-name {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 3px;
+    letter-spacing: -0.02em;
+}
+
+.preview-product-price {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--blue);
 }
 /* =========================================
    DEVELOPER PROFILE POLISH
@@ -2967,84 +3135,7 @@ body.landing-page {
    DEVELOPER PROFILE LINKS
    ========================================= */
 
-.developer-links {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-
-    gap: 10px;
-
-    margin-top: 22px;
-}
-
-.developer-links a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 38px;
-
-    padding: 8px 14px;
-
-    color: var(--blue);
-
-    background: #f5f9ff;
-
-    border: 1px solid #dbe8f8;
-
-    border-radius: 9px;
-
-    font-size: 13px;
-    font-weight: 700;
-
-    text-decoration: none;
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        border-color 0.2s ease;
-}
-
-.developer-links a:hover {
-    background: var(--blue-soft);
-
-    border-color: #bfd6f2;
-
-    transform: translateY(-2px);
-}
-
-/*Developer Link Polish*/
-
-.developer-links {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
-
-.developer-links a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 14px;
-
-    border: 1px solid #d7e5f5;
-    border-radius: 8px;
-
-    background: #f7faff;
-    color: var(--blue);
-
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-
-    transition: 0.2s ease;
-}
-
-.developer-links a:hover {
-    transform: translateY(-2px);
-    border-color: var(--blue);
-}
+/* Developer links removed for professional presentation */
 /* =========================================
    HOW IT WORKS - POLISH
    ========================================= */
@@ -5864,9 +5955,58 @@ html[data-theme="dark"] .landing-cta-band .landing-cta {
     background: #172b45;
 }
 
-html[data-theme="dark"] .hero-photo img {
-    border-color: #244565;
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34), 0 0 0 1px #355b83;
+html[data-theme="dark"] .assistant-preview {
+    background: #1a2f4a;
+    border-color: #2d4b6c;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(37, 99, 235, 0.15);
+}
+
+html[data-theme="dark"] .preview-header {
+    background: linear-gradient(180deg, #1e3a5f 0%, #162942 100%);
+    border-color: #2c4867;
+}
+
+html[data-theme="dark"] .preview-brand {
+    color: #f8fbff;
+}
+
+html[data-theme="dark"] .preview-chat {
+    background: #0f1f33;
+}
+
+html[data-theme="dark"] .preview-content p {
+    background: #1e3a5f;
+    border-color: #2c4867;
+    color: #f8fbff;
+}
+
+html[data-theme="dark"] .preview-message.user .preview-content p {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    border-color: #3b82f6;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+
+html[data-theme="dark"] .preview-products {
+    background: #1a2f4a;
+    border-color: #2c4867;
+}
+
+html[data-theme="dark"] .preview-product-card {
+    background: linear-gradient(135deg, #0f1f33, #162942);
+    border-color: #2c4867;
+}
+
+html[data-theme="dark"] .preview-product-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .preview-product-name {
+    color: #f8fbff;
+}
+
+html[data-theme="dark"] .preview-product-price {
+    color: #9bc5ff;
 }
 
 html[data-theme="dark"] .about-card,
@@ -5888,7 +6028,7 @@ html[data-theme="dark"] .about-card:hover {
 html[data-theme="dark"] .feature-card p,
 html[data-theme="dark"] .steps p,
 html[data-theme="dark"] .about-meta-item span,
-html[data-theme="dark"] .hero-photo figcaption span,
+html[data-theme="dark"] .hero-preview figcaption span,
 html[data-theme="dark"] .landing-footer { color: var(--muted); }
 
 html[data-theme="dark"] .about-meta-item strong,
@@ -5896,14 +6036,16 @@ html[data-theme="dark"] .about-card h3,
 html[data-theme="dark"] .feature-card h3,
 html[data-theme="dark"] .steps strong { color: #f7fbff; }
 
-html[data-theme="dark"] .tech-list li,
-html[data-theme="dark"] .developer-links a {
+html[data-theme="dark"] .hero-preview figcaption strong {
+    color: #f8fbff;
+}
+
+html[data-theme="dark"] .tech-list li {
     border-color: #31527a;
     color: #c7ddff;
     background: #182e4b;
 }
 
-html[data-theme="dark"] .developer-links a:hover,
 html[data-theme="dark"] .tech-list li:hover {
     border-color: #72a9ec;
     color: #fff;

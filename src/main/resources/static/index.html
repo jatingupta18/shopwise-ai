@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ShopWise AI by Jatin Kumar Gupta — an AI shopping assistant built with Java, Spring Boot, and a MySQL product catalog.">
-    <title>ShopWise AI | Jatin Kumar Gupta</title>
+    <meta name="description" content="ShopWise AI — an AI-powered shopping assistant built with Java, Spring Boot, and AI integration.">
+    <title>ShopWise AI | AI Shopping Assistant</title>
     <script src="/theme.js"></script>
     <link rel="stylesheet" href="/styles.css">
 </head>
@@ -17,7 +17,7 @@
         <a class="brand" href="/" aria-label="ShopWise AI home">
             <span class="brand-symbol" aria-hidden="true"><b>S</b><i></i><i></i></span>
             <span>
-                <small>STUDENT PROJECT</small>
+                <small>AI SHOPPING</small>
                 <strong>ShopWise <em>AI</em></strong>
             </span>
         </a>
@@ -27,9 +27,9 @@
         </button>
         <nav class="landing-nav" id="siteNav" aria-label="Page sections">
             <a href="#about">About</a>
-            <a href="#project">Project</a>
             <a href="#features">Features</a>
-            <a class="nav-cta" href="/chat.html">Explore Project</a>
+            <a href="#how-it-works">How It Works</a>
+            <a class="nav-cta" href="/chat.html">Start Shopping</a>
         </nav>
     </div>
 </header>
@@ -44,11 +44,11 @@
             </p>
 
             <h1 id="hero-title">
-                Hi, I'm Jatin Kumar Gupta
+                ShopWise AI
             </h1>
 
             <p class="hero-subtitle">
-                Creator &amp; Developer of <strong>ShopWise AI</strong>
+                Your Intelligent Shopping Assistant
             </p>
 
             <p class="hero-tagline">
@@ -58,16 +58,18 @@
             <p class="hero-intro">
                 An AI-powered shopping assistant that helps you find
                 the right products based on your needs and budget.
+                Experience catalog-grounded recommendations with real-time
+                product search, comparison, and budget-aware suggestions.
             </p>
 
             <div class="hero-actions">
 
                 <a class="landing-cta" href="/chat.html">
-                    Explore ShopWise AI
+                    Start Shopping
                 </a>
 
-                <a class="landing-cta secondary" href="#project">
-                    About the project
+                <a class="landing-cta secondary" href="#about">
+                    About the Project
                 </a>
 
             </div>
@@ -79,19 +81,58 @@
 
         </div>
 
-        <figure class="hero-photo">
+        <figure class="hero-preview">
 
-            <img
-                    src="/jatin-kumar-gupta.jpg.jpeg"
-                    alt="Portrait of Jatin Kumar Gupta"
-                    width="280"
-                    height="280"
-            >
-
-            <figcaption>
-                <strong>Jatin Kumar Gupta</strong>
-                <span>B.Tech CSE · OIST, Bhopal</span>
-            </figcaption>
+            <div class="assistant-preview">
+                <div class="preview-header">
+                    <span class="preview-brand">ShopWise AI</span>
+                    <span class="preview-status">● Online</span>
+                </div>
+                <div class="preview-chat">
+                    <div class="preview-message assistant">
+                        <span class="preview-avatar">✦</span>
+                        <div class="preview-content">
+                            <span class="preview-label">ShopWise AI</span>
+                            <p>Hi! What can I help you find today?</p>
+                        </div>
+                    </div>
+                    <div class="preview-message user">
+                        <div class="preview-content">
+                            <p>I need a laptop under ₹60,000</p>
+                        </div>
+                    </div>
+                    <div class="preview-message assistant">
+                        <span class="preview-avatar">✦</span>
+                        <div class="preview-content">
+                            <span class="preview-label">ShopWise AI</span>
+                            <p>I found several laptops within your budget. Here are the best options:</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-products">
+                    <div class="preview-product-card">
+                        <div class="preview-product-icon">💻</div>
+                        <div class="preview-product-info">
+                            <span class="preview-product-name">Dell Inspiron Laptop</span>
+                            <span class="preview-product-price">₹55,000</span>
+                        </div>
+                    </div>
+                    <div class="preview-product-card">
+                        <div class="preview-product-icon">💻</div>
+                        <div class="preview-product-info">
+                            <span class="preview-product-name">HP Pavilion Laptop</span>
+                            <span class="preview-product-price">₹52,000</span>
+                        </div>
+                    </div>
+                    <div class="preview-product-card">
+                        <div class="preview-product-icon">💻</div>
+                        <div class="preview-product-info">
+                            <span class="preview-product-name">Lenovo IdeaPad</span>
+                            <span class="preview-product-price">₹45,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </figure>
 
@@ -99,70 +140,46 @@
 
     <section class="landing-section" id="about" aria-labelledby="about-title">
 
-        <p class="section-kicker">DEVELOPER PROFILE</p>
+        <p class="section-kicker">ABOUT THE PROJECT</p>
 
-        <h2 id="about-title">Jatin Kumar Gupta</h2>
+        <h2 id="about-title">ShopWise AI</h2>
 
         <div class="about-card">
 
             <div class="about-intro">
 
-                <h3>Java &amp; Spring Boot Developer</h3>
+                <h3>AI-Powered Shopping Assistant</h3>
 
                 <p>
-                    I am currently pursuing B.Tech in Computer Science and
-                    Engineering at Oriental Institute of Science and Technology,
-                    Bhopal. I enjoy building complete applications, from backend
-                    APIs to simple and usable frontend experiences.
+                    ShopWise AI is an intelligent shopping assistant that combines
+                    modern web technologies with artificial intelligence to provide
+                    catalog-grounded product recommendations. The system uses a
+                    Spring Boot backend, configurable database support (H2, MySQL, or PostgreSQL),
+                    and AI integration to deliver accurate, budget-aware shopping suggestions.
                 </p>
-                <div class="developer-links">
-
-                    <a
-                            href="https://github.com/jatingupta18"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                    >
-                        GitHub
-                    </a>
-
-                    <a
-                            href="https://www.linkedin.com/in/jatingupta17"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                    >
-                        LinkedIn
-                    </a>
-
-                    <a
-                            href="mailto:jatingupta4010@gmail.com"
-                    >
-                        Email
-                    </a>
-
-                </div>
 
             </div>
 
             <div class="about-meta">
 
                 <div class="about-meta-item">
-                    <span>EDUCATION</span>
+                    <span>TECHNOLOGY</span>
                     <strong>
-                        B.Tech in Computer Science &amp; Engineering
+                        Java · Spring Boot · Spring AI
                     </strong>
                 </div>
 
                 <div class="about-meta-item">
-                    <span>COLLEGE</span>
+                    <span>AI MODEL</span>
                     <strong>
-                        Oriental Institute of Science and Technology, Bhopal
+                        Ollama / Llama 3.2
                     </strong>
                 </div>
 
                 <div class="about-meta-item">
-                    <span>FOCUS</span>
+                    <span>DATABASE</span>
                     <strong>
-                        Java · Spring Boot · AI
+                        H2 · MySQL · PostgreSQL
                     </strong>
                 </div>
 
@@ -174,36 +191,24 @@
 
     <section
             class="landing-section"
-            id="project"
-            aria-labelledby="project-title"
+            id="technology"
+            aria-labelledby="technology-title"
     >
 
         <p class="section-kicker">
-            THE PROJECT
+            TECHNOLOGY STACK
         </p>
 
-        <h2 id="project-title">
-            The ShopWise AI Project
+        <h2 id="technology-title">
+            Built with Modern Technologies
         </h2>
 
         <div class="project-intro">
 
             <p>
-                ShopWise AI is an AI-powered shopping assistant designed
-                to help users discover products based on their requirements
-                and budget.
-            </p>
-
-            <p>
-                The application combines a Spring Boot backend, a MySQL
-                product catalog, and an AI assistant to provide
-                catalog-based shopping recommendations.
-            </p>
-
-            <p>
-                Product information comes from the actual catalog, including
-                product names, categories, descriptions, and prices, instead
-                of relying on made-up product data.
+                ShopWise AI is built using industry-standard technologies
+                and frameworks, demonstrating modern full-stack development
+                practices with AI integration.
             </p>
 
         </div>
@@ -214,7 +219,7 @@
             <li>Spring Boot</li>
             <li>Spring AI</li>
             <li>Ollama / Llama 3.2</li>
-            <li>MySQL</li>
+            <li>H2 · MySQL · PostgreSQL</li>
             <li>Spring Data JPA</li>
             <li>REST APIs</li>
             <li>HTML, CSS and JavaScript</li>
@@ -241,8 +246,8 @@
             </article>
             <article class="feature-card">
                 <span class="feature-icon" aria-hidden="true">▣</span>
-                <h3>MySQL Product Catalog</h3>
-                <p>Product names, descriptions, prices, and categories are stored in MySQL and read through Spring Data JPA — not a hardcoded list.</p>
+                <h3>Product Catalog</h3>
+                <p>Product names, descriptions, prices, and categories are stored in a database (H2, MySQL, or PostgreSQL) and read through Spring Data JPA — not a hardcoded list.</p>
             </article>
             <article class="feature-card">
                 <span class="feature-icon" aria-hidden="true">⌕</span>
@@ -279,7 +284,7 @@
             <li>
                 <span>3</span>
                 <strong>Search the Product Catalog</strong>
-                <p>Spring Boot queries MySQL through the product APIs and tools.</p>
+                <p>Spring Boot queries the database through the product APIs and tools.</p>
             </li>
             <li>
                 <span>4</span>
@@ -290,14 +295,14 @@
     </section>
 
     <section class="landing-cta-band" aria-labelledby="explore-title">
-        <h2 id="explore-title">Ready to try it?</h2>
-        <p>Open the existing ShopWise AI assistant and ask for products from the live catalog.</p>
-        <a class="landing-cta" href="/chat.html">Explore ShopWise AI</a>
+        <h2 id="explore-title">Ready to find your next product?</h2>
+        <p>Open the ShopWise AI assistant and ask for products from the live catalog.</p>
+        <a class="landing-cta" href="/chat.html">Try AI Shopping Assistant</a>
     </section>
 </main>
 
 <footer class="landing-footer">
-    <p>ShopWise AI · built by Jatin Kumar Gupta as a B.Tech CSE academic project</p>
+    <p>ShopWise AI · AI-Powered Shopping Assistant</p>
 </footer>
 <script src="/landing.js"></script>
 </body>
