@@ -2140,6 +2140,11 @@ body.landing-page {
         padding: 10px 8px;
     }
 
+    .landing-nav a:focus {
+        outline: 2px solid var(--blue);
+        outline-offset: 2px;
+    }
+
     .landing-header-inner {
         position: relative;
     }
@@ -2161,6 +2166,38 @@ body.landing-page {
         padding:
             12px
             16px;
+    }
+}
+
+/* Dark mode mobile navigation fix */
+@media (max-width: 720px) {
+
+    html[data-theme="dark"] .landing-nav {
+        background: #0f1f33;
+        border-color: #2c4867;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    html[data-theme="dark"] .landing-nav a {
+        color: #f8fbff;
+    }
+
+    html[data-theme="dark"] .landing-nav a:hover {
+        color: #9bc5ff;
+    }
+
+    html[data-theme="dark"] .landing-nav .nav-cta {
+        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        color: #fff;
+    }
+
+    html[data-theme="dark"] .landing-nav .nav-cta:hover {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+
+    html[data-theme="dark"] .landing-nav a:focus {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
     }
 }
 
@@ -5947,6 +5984,15 @@ html[data-theme="dark"] .about-intro p,
 html[data-theme="dark"] .section-lead { color: #c4d2e5; }
 
 html[data-theme="dark"] .landing-nav a:hover { color: #9bc5ff; }
+
+html[data-theme="dark"] .landing-nav .nav-cta {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+}
+
+html[data-theme="dark"] .landing-nav .nav-cta:hover {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
 
 html[data-theme="dark"] .landing-cta.secondary,
 html[data-theme="dark"] .landing-cta-band .landing-cta {
